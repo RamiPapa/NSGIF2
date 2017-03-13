@@ -590,6 +590,7 @@ CropRectAspectFill(CGSize targetSize, CGSize sizeValueOfAspectRatio){
 
     UIImage *destImage = [[UIImage alloc] initWithCGImage:destRef scale:0.0 orientation:image.imageOrientation];
     CGImageRelease(destRef);
+    CGImageRelease(sourceRef);
 
     return destImage;
 }
