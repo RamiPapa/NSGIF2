@@ -98,22 +98,22 @@
 - (IBAction)button2Tapped:(id)sender {
     
     #if TARGET_IPHONE_SIMULATOR
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops!" message:@"You can't use the camera demo in the simulator. Try the video demo." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
-        return;
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops!" message:@"You can't use the camera demo in the simulator. Try the video demo." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [alert show];
+    
+    #else
+    
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.videoQuality = UIImagePickerControllerQualityTypeMedium;
+    picker.delegate = self;
+    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    picker.mediaTypes = @[(NSString *)kUTTypeMovie];
+    
+    // Present the picker
+    [self presentViewController:picker animated:YES completion:nil];
+    
     #endif
-
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        UIImagePickerController *picker = [[UIImagePickerController alloc]init];
-        picker.videoQuality = UIImagePickerControllerQualityTypeMedium;
-        picker.delegate = self;
-        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        picker.mediaTypes = @[(NSString *)kUTTypeMovie];
-        
-        // Present the picker
-        [self presentViewController:picker animated:YES completion:nil];
-    });
 }
 
 - (IBAction)button3Tapped:(id)sender {
@@ -134,9 +134,8 @@
     request.aspectRatioToCrop = CGSizeMake(4,3);
     request.frameCount = 10;
 
-    [NSGIF extract:request completion:^(NSArray<NSURL *> *extractedFrameImageUrls) {
-        NSLog(@"Finished generating frames: %@", extractedFrameImageUrls);
-
+    [NSGIF extract:request completion:^(NSFrameExtractingResponse * response) {
+        
         [self.activityIndicator stopAnimating];
         [UIView animateWithDuration:0.3 animations:^{
             self.button1.alpha = 0.0f;
@@ -144,16 +143,17 @@
             self.button3.alpha = 0.0f;
             self.webView.alpha = 1.0f;
         }];
-
-        for(NSURL * imageUrl in extractedFrameImageUrls){
+        
+        for(NSURL * imageUrl in response.imageUrls){
             UIImage * image = [UIImage imageWithContentsOfFile:imageUrl.path];
             UIView * imageView = [[UIImageView alloc] initWithImage:image];
             imageView.contentMode = UIViewContentModeScaleAspectFit;
-            imageView.frame = CGRectMake(0,((CGFloat)[extractedFrameImageUrls indexOfObject:imageUrl])*(image.size.height/6), image.size.width/6,image.size.height/6);
+            imageView.frame = CGRectMake(0,((CGFloat)[response.imageUrls indexOfObject:imageUrl])*(image.size.height/6), image.size.width/6,image.size.height/6);
             imageView.clipsToBounds = YES;
             imageView.layer.borderWidth = 1;
             [scrollView addSubview:imageView];
         }
+        
     }];
 
     [self.view addSubview:scrollView];

@@ -40,5 +40,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+    <key>NSCameraUsageDescription</key>
+    <string>This app uses your camera to take amazing photos. It works best when you allow. Thanks!
+    </string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>This app uses your camera to take amazing photos. It works best when you allow. Thanks!
+    </string>
 </dict>
 </plist>

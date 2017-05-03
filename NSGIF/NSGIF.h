@@ -118,7 +118,7 @@ typedef void (^ NSGIFProgressHandler)(double progress, NSUInteger offset, NSUInt
 #pragma mark NSSerializedResourceResponse
 @interface NSSerializedResourceResponse : NSObject
 
-@property(nonatomic, readonly) NSArray<NSURL *> * imageUrls;
+@property(nullable, nonatomic, readonly) NSArray<NSURL *> * imageUrls;
 
 @end
 
