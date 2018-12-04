@@ -1,5 +1,3 @@
-[AD] An App, But Contains Many Photo Apps. Do Everything With Photos - https://get.apps.photo
-
 ![NSGIF2](https://raw.githubusercontent.com/metasmile/NSGIF2/master/title.png?v=2)
 [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/vsouza/awesome-ios#gif)
 [![Stories in Ready](https://badge.waffle.io/metasmile/NSGIF2.svg?label=ready&title=Tasks)](http://waffle.io/metasmile/NSGIF2)
