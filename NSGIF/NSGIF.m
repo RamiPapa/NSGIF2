@@ -318,7 +318,7 @@ CropRectAspectFill(CGSize targetSize, CGSize sizeValueOfAspectRatio){
                 currentFrameImage = [self.class imageByCroppingRect:currentFrameImage rect:CropRectAspectFill(currentFrameImage.size, aspectRatioToCrop)];
             }
 
-            NSAssert(!error, @"Error copying image to create gif");
+            NSAssert(!error, @"Error11 copying image to create gif");
             if (error) {
                 NSLog(@"Error copying image: %@", error);
             }
